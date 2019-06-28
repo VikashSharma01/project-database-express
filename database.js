@@ -18,7 +18,7 @@ connection.connect((err) => {
     throw err;
   }
   // eslint-disable-next-line no-console
-  console.log('Database connected sucessfully...');
+  console.log('... Database connected successfully ...');
 });
 
 const droppingTable = () => new Promise((resolve, reject) => {
@@ -74,7 +74,9 @@ const moviesTable = () => new Promise((resolve, reject) => {
     director_id MEDIUMINT,
     actor varchar(100),
     year int,
-    FOREIGN KEY(director_id) REFERENCES director(directorId))`, (err, res) => {
+    FOREIGN KEY(director_id) REFERENCES director(directorId)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)`, (err, res) => {
     if (err) {
       reject(err);
     } else {
@@ -110,21 +112,21 @@ const insertingInMoviesTable = () => new Promise((resolve, reject) => {
 });
 
 droppingTable().then(() => {
-  console.log('Tables Dropped Sucessfully...');
+  console.log('   => Tables Dropped Sucessfully...');
   return directorTable();
 }).then(() => {
-  console.log('Directors Table Created...');
+  console.log('   => Directors Table Created...');
   return insertingInDirectorTable();
 }).then(() => {
-  console.log('Values Inserted in Director Table...');
+  console.log('   => Values Inserted in Director Table...');
   return moviesTable();
 })
   .then(() => {
-    console.log('Movies Table Created...');
+    console.log('   =>  Movies Table Created...');
     return insertingInMoviesTable();
   })
   .then(() => {
-    console.log('Values Inserted in Director Table...');
-    console.log('Sucessfull...');
+    console.log('   => Values Inserted in Director Table...');
+    console.log('... Database Task Successfull ...');
     connection.end();
   });
