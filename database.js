@@ -112,21 +112,21 @@ const insertingInMoviesTable = () => new Promise((resolve, reject) => {
 });
 
 droppingTable().then(() => {
-  console.log('   => Tables Dropped Sucessfully...');
+  console.log('   => [Tables Dropped Sucessfully]');
   return directorTable();
 }).then(() => {
-  console.log('   => Directors Table Created...');
+  console.log('   => [Directors Table Created]');
   return insertingInDirectorTable();
 }).then(() => {
-  console.log('   => Values Inserted in Director Table...');
+  console.log('   => [Values Inserted in Director Table]');
   return moviesTable();
 })
   .then(() => {
-    console.log('   =>  Movies Table Created...');
+    console.log('   => [Movies Table Created]');
     return insertingInMoviesTable();
   })
   .then(() => {
-    console.log('   => Values Inserted in Director Table...');
+    console.log('   => [Values Inserted in Director Table]');
     console.log('... Database Task Successfull ...');
     connection.end();
   });

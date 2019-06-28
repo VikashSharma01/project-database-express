@@ -88,7 +88,7 @@ const deleteMoviesNameWithGivenId = id => new Promise((resolve, reject) => {
 
 // getAllMovies().then(v => console.log(v));
 // getAllMoviesNamesById(3).then(v => console.log(v));
- addNewMovieToTable(51, "Dev-D", "A Bollywood Movie", 140, "Drama", 5.5, "NA", 1200, "NA", "Christopher Nolan" , "Abhay Deol", 2006).then(v => console.log(v));
+// addNewMovieToTable(51, "Dev-D", "A Bollywood Movie", 140, "Drama", 5.5, "NA", 1200, "NA", "Abhay Deol" , "Abhay Deol", 2006).then(v => console.log(v));
 // updateMovieNameWithGivenId(1, "Sha Red").then(v => console.log(v));
 // deleteMoviesNameWithGivenId(52).then(v => console.log(v));
 

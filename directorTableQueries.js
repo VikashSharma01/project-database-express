@@ -82,7 +82,7 @@ const deleteDirectorNameWithGivenId = id => new Promise((resolve, reject) => {
 
 // getAllDirectors().then(v => console.log(v));
 // getAllDirectorsNamesById(3).then(v => console.log(v));
-// addNewDirectorIntoTable("Vikash Sharma").then(v => console.log(v));
+// addNewDirectorIntoTable("Abhay Deol").then(v => console.log(v));
 // updateDirectorNameWithGivenId(36, "Vikash K. Sharma").then(v => console.log(v));
 // deleteDirectorNameWithGivenId(36).then(v => console.log(v));
 
