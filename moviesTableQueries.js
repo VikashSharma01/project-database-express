@@ -1,4 +1,6 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable camelcase */
+/* eslint-disable max-len */
 /* eslint-disable no-unused-vars */
 const mysql = require('mysql');
 
@@ -44,9 +46,13 @@ const getAllMoviesNamesById = movieId => new Promise((resolve, reject) => {
   });
 });
 
-const addNewMovieToTable = (addRank, addTitle, addDescription, addRuntime, addGenre, addRating, addMetascore, addVotes, add_Gross_Earning_in_Mil, addDirector, addActor, addYear) => new Promise((resolve, reject) => {
-  connection.query(`insert into movies(rank, title, description, runtime, genre, rating, metascore, votes, gross_Earning_in_Mil, director_id, actor, year) 
-  values(${addRank}, "${addTitle}", "${addDescription}", ${addRuntime}, "${addGenre}", ${addRating}, "${addMetascore}", ${addVotes}, "${add_Gross_Earning_in_Mil}", (select directorId from director where director_name = "${addDirector}"), "${addActor}", ${addYear})`, (err, res) => {
+const addNewMovieToTable = (addRank, addTitle, addDescription, addRuntime, addGenre, addRating, addMetascore,
+  addVotes, add_Gross_Earning_in_Mil, addDirector, addActor, addYear) => new Promise((resolve, reject) => {
+  connection.query(`insert into movies(rank, title, description, runtime, genre, rating,
+                   metascore, votes, gross_Earning_in_Mil, director_id, actor, year) values(
+                   ${addRank}, "${addTitle}", "${addDescription}", ${addRuntime}, "${addGenre}", ${addRating},
+                   "${addMetascore}", ${addVotes}, "${add_Gross_Earning_in_Mil}",
+                   (select directorId from director where director_name = "${addDirector}"), "${addActor}", ${addYear})`, (err, res) => {
     if (err) {
       reject(err);
     } else {
@@ -82,7 +88,7 @@ const deleteMoviesNameWithGivenId = id => new Promise((resolve, reject) => {
 
 // getAllMovies().then(v => console.log(v));
 // getAllMoviesNamesById(3).then(v => console.log(v));
-// addNewMovieToTable(51, "Dev-D", "A Bollywood Movie", 140, "Drama", 5.5, "NA", 1200, "NA", "Christopher Nolan" , "Abhay Deol", 2006).then(v => console.log(v));
+ addNewMovieToTable(51, "Dev-D", "A Bollywood Movie", 140, "Drama", 5.5, "NA", 1200, "NA", "Christopher Nolan" , "Abhay Deol", 2006).then(v => console.log(v));
 // updateMovieNameWithGivenId(1, "Sha Red").then(v => console.log(v));
 // deleteMoviesNameWithGivenId(52).then(v => console.log(v));
 
