@@ -8,5 +8,7 @@ const movieFunctons = ('./models/moviesTableQueries.js');
 const app = express();
 
 app.get('/', (req, res) => {
-    
-})
+  res.send('Hello expressJS file for express branch test...');
+});
+
+app.listen(3000, () => console.log('listening port 3000 ...'));
