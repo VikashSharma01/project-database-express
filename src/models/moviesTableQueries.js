@@ -79,6 +79,16 @@ const deleteMoviesNameWithGivenId = id => new Promise((resolve, reject) => {
   });
 });
 
+/* ----------------------Exporting functions-----------------------*/
+module.exports = {
+  getAllMovies,
+  getAllMoviesNamesById,
+  addNewMovieToTable,
+  updateMovieNameWithGivenId,
+  deleteMoviesNameWithGivenId,
+};
+/*-----------------------------------------------------------------*/
+
 /* ----------------------Resolving the Promise and Getting data-------------------------*/
 
 // getAllMovies().then(v => console.log(v));
