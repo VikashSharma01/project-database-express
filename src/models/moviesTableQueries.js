@@ -19,7 +19,7 @@ const connection = db.dbconnection();
 
 const getAllMovies = () => new Promise((resolve, reject) => {
   connection.query(`select id, rank, title, description, runtime, metascore, votes, gross_Earning_in_Mil ,
-  director_name, actor, year from movies join director on movies.director_id = director.directorId`, (err, res) => {
+  director_name, actor, year from movies join director on movies.director_id = director.directorId order by rank asc`, (err, res) => {
     if (err) {
       reject(err);
     } else {

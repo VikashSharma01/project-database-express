@@ -43,6 +43,7 @@ const insertingInDirectorTable = () => new Promise((resolve, reject) => {
   const distinctDirectorList = [...new Set(repeatedDirectorList)];
   distinctDirectorList.forEach((value) => {
     connection.query(`insert into director(director_name) values("${value}")`, (err, res) => {
+      // console.log('Inserting', value);
       if (err) {
         reject(err);
       } else {
@@ -94,6 +95,7 @@ const insertingInMoviesTable = () => new Promise((resolve, reject) => {
     a.then((directorIds) => {
       connection.query(`insert into movies(rank, title, description, runtime, genre, rating, metascore, votes, gross_Earning_in_Mil, director_id, actor, year)
   values(${value.Rank}, "${value.Title}", "${value.Description}", ${value.Runtime}, "${value.Genre}", ${value.Rating}, "${value.Metascore}", ${value.Votes}, "${value.Gross_Earning_in_Mil}", ${directorIds}, "${value.Actor}", ${value.Year})`, (err, res) => {
+        // console.log('Inserting');
         if (err) {
           reject(err);
         } else {
