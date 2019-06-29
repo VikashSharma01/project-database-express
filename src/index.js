@@ -6,7 +6,3 @@ const directorFunctons = ('./models/directorTableQueries.js');
 const movieFunctons = ('./models/moviesTableQueries.js');
 
 const app = express();
-
-app.get('/', (req, res) => {
-    
-})

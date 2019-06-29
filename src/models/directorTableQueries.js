@@ -71,6 +71,18 @@ const deleteDirectorNameWithGivenId = id => new Promise((resolve, reject) => {
   });
 });
 
+/* ----------------------Exporting Files--------------------*/
+
+module.exports = {
+  getAllDirectors,
+  getAllDirectorsNamesById,
+  addNewDirectorIntoTable,
+  updateDirectorNameWithGivenId,
+  deleteDirectorNameWithGivenId,
+};
+
+/* ---------------------------------------------------------*/
+
 /* ----------------------Resolving the Promise and Getting data-------------------------*/
 
 // getAllDirectors().then(v => console.log(v));
