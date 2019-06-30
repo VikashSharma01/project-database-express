@@ -40,13 +40,13 @@ const getAllMoviesNamesById = movieId => new Promise((resolve, reject) => {
   });
 });
 
-const addNewMovieToTable = (addRank, addTitle, addDescription, addRuntime, addGenre, addRating, addMetascore,
-  addVotes, add_Gross_Earning_in_Mil, addDirector, addActor, addYear) => new Promise((resolve, reject) => {
+const addNewMovieToTable = item => new Promise((resolve, reject) => {
+  console.log(item);
   connection.query(`insert into movies(rank, title, description, runtime, genre, rating,
                    metascore, votes, gross_Earning_in_Mil, director_id, actor, year) values(
-                   ${addRank}, "${addTitle}", "${addDescription}", ${addRuntime}, "${addGenre}", ${addRating},
-                   "${addMetascore}", ${addVotes}, "${add_Gross_Earning_in_Mil}",
-                   (select directorId from director where director_name = "${addDirector}"), "${addActor}", ${addYear})`, (err, res) => {
+                   ${item.rank}, "${item.title}", "${item.description}", ${item.runtime}, "${item.genre}", ${item.rating},
+                   "${item.metascore}", ${item.votes}, "${item.gross_Earning_in_Mil}",
+                   (select directorId from director where director_name = "${item.director}"), "${item.actor}", ${item.year})`, (err, res) => {
     if (err) {
       // eslint-disable-next-line prefer-promise-reject-errors
       reject(`Oops... ${err}`);
@@ -58,7 +58,7 @@ const addNewMovieToTable = (addRank, addTitle, addDescription, addRuntime, addGe
 });
 
 const updateMovieNameWithGivenId = (id, movieName) => new Promise((resolve, reject) => {
-  connection.query(`update movies set title = "${movieName}" where id = ${id}`, (err, res) => {
+  connection.query(`update movies set ? where id = ${id}`, movieName, (err, res) => {
     if (err) {
       reject(err);
     } else {

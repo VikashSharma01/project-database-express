@@ -1,6 +1,7 @@
 /* eslint-disable linebreak-style */
+/* eslint-disable max-len */
 /* eslint-disable no-console */
-/* eslint-disable linebreak-style */
+
 const db = require('../utils/databaseAuth');
 const moviesDataFromJson = require('../movies_data/movies.json');
 
@@ -38,20 +39,18 @@ const directorTable = () => new Promise((resolve, reject) => {
   });
 });
 
-const insertingInDirectorTable = () => new Promise((resolve, reject) => {
-  const repeatedDirectorList = moviesDataFromJson.map(value => value.Director);
-  const distinctDirectorList = [...new Set(repeatedDirectorList)];
-  distinctDirectorList.forEach((value) => {
-    connection.query(`insert into director(director_name) values("${value}")`, (err, res) => {
-      // console.log('Inserting', value);
-      if (err) {
-        reject(err);
-      } else {
-        resolve(res);
-      }
-    });
+const repeatedDirectorList = moviesDataFromJson.map(value => value.Director);
+const distinctDirectorList = [...new Set(repeatedDirectorList)];
+
+const insertingInDirectorTable = () => Promise.all(distinctDirectorList.map(val => new Promise((resolve, reject) => {
+  connection.query(`insert into director(director_name) values("${val}")`, (err, res) => {
+    if (err) {
+      reject(err);
+    } else {
+      resolve(res);
+    }
   });
-});
+})));
 
 const moviesTable = () => new Promise((resolve, reject) => {
   connection.query(`create table movies(
@@ -89,22 +88,19 @@ const getDirectorsId = getingDirectorId => new Promise((resolve, reject) => {
   });
 });
 
-const insertingInMoviesTable = () => new Promise((resolve, reject) => {
-  moviesDataFromJson.forEach((value) => {
-    const a = getDirectorsId(value.Director);
-    a.then((directorIds) => {
-      connection.query(`insert into movies(rank, title, description, runtime, genre, rating, metascore, votes, gross_Earning_in_Mil, director_id, actor, year)
+const insertingInMoviesTable = () => Promise.all(moviesDataFromJson.map(value => new Promise((resolve, reject) => {
+  const a = getDirectorsId(value.Director);
+  a.then((directorIds) => {
+    connection.query(`insert into movies(rank, title, description, runtime, genre, rating, metascore, votes, gross_Earning_in_Mil, director_id, actor, year)
   values(${value.Rank}, "${value.Title}", "${value.Description}", ${value.Runtime}, "${value.Genre}", ${value.Rating}, "${value.Metascore}", ${value.Votes}, "${value.Gross_Earning_in_Mil}", ${directorIds}, "${value.Actor}", ${value.Year})`, (err, res) => {
-        // console.log('Inserting');
-        if (err) {
-          reject(err);
-        } else {
-          resolve(res);
-        }
-      });
+      if (err) {
+        reject(err);
+      } else {
+        resolve(res);
+      }
     });
   });
-});
+})));
 
 droppingTable().then(() => {
   console.log('   => [Tables Dropped Sucessfully]');
