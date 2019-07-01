@@ -57,7 +57,7 @@ directorRouter.get('/api/directors/:directorId', (req, res) => {
 // });
 
 directorRouter.put('/api/directors/:directorId', (req, res) => {
-  console.log(req.params);
+  // console.log(req.params);
   directors.updateDirectorNameWithGivenId(req.params.directorId, req.body)
     .then((data) => {
       res.send(data);
