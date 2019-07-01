@@ -43,8 +43,8 @@ const getAllMoviesNamesById = movieId => new Promise((resolve, reject) => {
 
 const addNewMovieToTable = item => new Promise((resolve, reject) => {
   // console.log(item);
-  connection.query(`insert into movies(Rank, Title, Description, Runtime, Genre, Rating,
-                   Metascore, Votes, Gross_Earning_in_Mil, director_id, Actor, Year) values(
+  connection.query(`insert into movies(rank, title, description, runtime, genre, rating,
+                   metascore, votes, gross_Earning_in_Mil, director_id, actor, year) values(
                    ${item.Rank}, "${item.Title}", "${item.Description}", ${item.Runtime}, "${item.Genre}", ${item.Rating},
                    "${item.Metascore}", ${item.Votes}, "${item.Gross_Earning_in_Mil}",
                    (select directorId from director where director_name = "${item.Director}"), "${item.Actor}", ${item.Year})`, (err, res) => {
