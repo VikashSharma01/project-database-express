@@ -39,7 +39,7 @@ const getAllDirectorsNamesById = id => new Promise((resolve, reject) => {
 
 const addNewDirectorIntoTable = newDir => new Promise((resolve, reject) => {
   connection.query(`INSERT INTO director(director_name)
-               VALUES("${newDir}")`, (err, data) => {
+               VALUES("${newDir.director_name}")`, (err, data) => {
     if (err) {
       reject(err);
     } else {
@@ -50,7 +50,8 @@ const addNewDirectorIntoTable = newDir => new Promise((resolve, reject) => {
 });
 
 const updateDirectorNameWithGivenId = (id, dirName) => new Promise((resolve, reject) => {
-  connection.query(`update director set director_name = "${dirName}" where directorId = ${id}`, (err, res) => {
+  // console.log(dirName);
+  connection.query(`update director set ? where directorId = ${id}`, dirName, (err, res) => {
     if (err) {
       reject(err);
     } else {

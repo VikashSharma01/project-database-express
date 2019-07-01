@@ -30,6 +30,7 @@ const getAllMovies = () => new Promise((resolve, reject) => {
 });
 
 const getAllMoviesNamesById = movieId => new Promise((resolve, reject) => {
+  console.log(movieId);
   connection.query(`select * from movies where id = ${movieId}`, (err, res) => {
     if (err) {
       reject(err);
@@ -41,12 +42,12 @@ const getAllMoviesNamesById = movieId => new Promise((resolve, reject) => {
 });
 
 const addNewMovieToTable = item => new Promise((resolve, reject) => {
-  console.log(item);
-  connection.query(`insert into movies(rank, title, description, runtime, genre, rating,
-                   metascore, votes, gross_Earning_in_Mil, director_id, actor, year) values(
-                   ${item.rank}, "${item.title}", "${item.description}", ${item.runtime}, "${item.genre}", ${item.rating},
-                   "${item.metascore}", ${item.votes}, "${item.gross_Earning_in_Mil}",
-                   (select directorId from director where director_name = "${item.director}"), "${item.actor}", ${item.year})`, (err, res) => {
+  // console.log(item);
+  connection.query(`insert into movies(Rank, Title, Description, Runtime, Genre, Rating,
+                   Metascore, Votes, Gross_Earning_in_Mil, director_id, Actor, Year) values(
+                   ${item.Rank}, "${item.Title}", "${item.Description}", ${item.Runtime}, "${item.Genre}", ${item.Rating},
+                   "${item.Metascore}", ${item.Votes}, "${item.Gross_Earning_in_Mil}",
+                   (select directorId from director where director_name = "${item.Director}"), "${item.Actor}", ${item.Year})`, (err, res) => {
     if (err) {
       // eslint-disable-next-line prefer-promise-reject-errors
       reject(`Oops... ${err}`);
