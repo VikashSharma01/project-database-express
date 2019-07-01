@@ -30,7 +30,7 @@ const getAllMovies = () => new Promise((resolve, reject) => {
 });
 
 const getAllMoviesNamesById = movieId => new Promise((resolve, reject) => {
-  console.log(movieId);
+  // console.log(movieId);
   connection.query(`select * from movies where id = ${movieId}`, (err, res) => {
     if (err) {
       reject(err);

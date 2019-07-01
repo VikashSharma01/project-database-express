@@ -6,7 +6,6 @@ const directors = require('../models/directorTableQueries');
 
 const directorRouter = express.Router();
 
-
 /* ------------------- API end points for directors ----------------------*/
 directorRouter.get('/api/directors', (req, res) => {
   directors.getAllDirectors().then(v => res.send(v));
@@ -50,7 +49,7 @@ directorRouter.get('/api/directors/:directorId', (req, res) => {
 //     res.status(400).send(error.details[0].message);
 //     return;
 //   }
-//   directors.updateDirectorNameWithGivenId(req.body)
+//   directors.updateDirectorNameWithGivenId(req.params.directorId, req.body)
 //     .then((data) => {
 //       res.send(data);
 //     });
