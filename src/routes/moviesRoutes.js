@@ -51,6 +51,9 @@ movieRouter.put('/api/movies/:id', (req, res, next) => {
 
   movies.updateMovieNameWithGivenId(req.params.id, req.body)
     .then((data) => {
+      if (data.affectedRows === 0) {
+        res.send('Invalid ID');
+      }
       res.send(data);
     })
     .catch(err => next(err));
@@ -59,6 +62,9 @@ movieRouter.put('/api/movies/:id', (req, res, next) => {
 movieRouter.delete('/api/movies/:id', (req, res, next) => {
   movies.deleteMoviesNameWithGivenId(req.params.id)
     .then((data) => {
+      if (data.affectedRows === 0) {
+        res.send('Invalid ID');
+      }
       res.send(data);
     })
     .catch(err => next(err));

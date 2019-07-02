@@ -50,6 +50,9 @@ directorRouter.put('/api/directors/:directorId', (req, res, next) => {
   }
   directors.updateDirectorNameWithGivenId(req.params.directorId, req.body)
     .then((data) => {
+      if (data.affectedRows === 0) {
+        res.send('Invalid ID');
+      }
       res.send(data);
     })
     .catch(err => next(err));
@@ -58,6 +61,10 @@ directorRouter.put('/api/directors/:directorId', (req, res, next) => {
 directorRouter.delete('/api/directors/:directorId', (req, res, next) => {
   directors.deleteDirectorNameWithGivenId(req.params.directorId)
     .then((data) => {
+      // console.log(data.affectedRows);
+      if (data.affectedRows === 0) {
+        res.send('Invalid ID');
+      }
       res.send(data);
     })
     .catch(err => next(err));
