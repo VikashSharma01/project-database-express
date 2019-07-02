@@ -26,14 +26,6 @@ movieRouter.post('/api/movies', (req, res) => {
     });
 });
 
-movieRouter.post('/api/movies', (req, res) => {
-  // console.log(req.body);
-  movies.addNewMovieToTable(req.body)
-    .then((data) => {
-      res.send(data);
-    });
-});
-
 movieRouter.get('/api/movies/:id', (req, res) => {
   // console.log(req.params);
   movies.getAllMoviesNamesById(req.params.id)
@@ -51,15 +43,6 @@ movieRouter.put('/api/movies/:id', (req, res) => {
     return;
   }
 
-  movies.updateMovieNameWithGivenId(req.params.id, req.body)
-    .then((data) => {
-      res.send(data);
-    });
-});
-
-movieRouter.put('/api/movies/:id', (req, res) => {
-  // console.log(req.param.id);
-  // console.log(req.body);
   movies.updateMovieNameWithGivenId(req.params.id, req.body)
     .then((data) => {
       res.send(data);

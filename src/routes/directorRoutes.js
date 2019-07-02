@@ -25,14 +25,6 @@ directorRouter.post('/api/directors', (req, res) => {
     });
 });
 
-directorRouter.post('/api/directors', (req, res) => {
-  // console.log(req.body);
-  directors.addNewDirectorIntoTable(req.body)
-    .then((data) => {
-      res.send(data);
-    });
-});
-
 directorRouter.get('/api/directors/:directorId', (req, res) => {
   // console.log(req.params);
   directors.getAllDirectorsNamesById(req.params.directorId)
@@ -41,23 +33,14 @@ directorRouter.get('/api/directors/:directorId', (req, res) => {
     });
 });
 
-// directorRouter.put('/api/directors/:directorId', (req, res) => {
-//   app.put('/api/directors/:directorId', (req, res) => {
-//   const validateDirectorPut = validation.validateDirectorPutRequest();
-//   const { error } = Joi.validate(req.body, validateDirectorPut);
-//   // console.log(result);
-//   if (error) {
-//     res.status(400).send(error.details[0].message);
-//     return;
-//   }
-//   directors.updateDirectorNameWithGivenId(req.params.directorId, req.body)
-//     .then((data) => {
-//       res.send(data);
-//     });
-// });
-
 directorRouter.put('/api/directors/:directorId', (req, res) => {
-  // console.log(req.params);
+  const validateDirectorPut = validation.validateDirectorPutRequest();
+  const { error } = Joi.validate(req.body, validateDirectorPut);
+  // console.log(result);
+  if (error) {
+    res.status(400).send(error.details[0].message);
+    return;
+  }
   directors.updateDirectorNameWithGivenId(req.params.directorId, req.body)
     .then((data) => {
       res.send(data);
