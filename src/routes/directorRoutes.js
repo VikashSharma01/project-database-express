@@ -41,7 +41,8 @@ directorRouter.get('/api/directors/:directorId', (req, res) => {
     });
 });
 
-// app.put('/api/directors/:directorId', (req, res) => {
+// directorRouter.put('/api/directors/:directorId', (req, res) => {
+//   app.put('/api/directors/:directorId', (req, res) => {
 //   const validateDirectorPut = validation.validateDirectorPutRequest();
 //   const { error } = Joi.validate(req.body, validateDirectorPut);
 //   // console.log(result);
