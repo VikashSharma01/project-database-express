@@ -8,11 +8,12 @@ const movieRouter = express.Router();
 
 /* ------------------- API end points for movies ----------------------*/
 
-movieRouter.get('/api/movies', (req, res) => {
-  movies.getAllMovies().then(v => res.send(v));
+movieRouter.get('/api/movies', (req, res, next) => {
+  movies.getAllMovies().then(v => res.send(v))
+    .catch(err => next(err));
 });
 
-movieRouter.post('/api/movies', (req, res) => {
+movieRouter.post('/api/movies', (req, res, next) => {
   const validateMoviePost = validation.validateMoviePostRequest();
   const { error } = Joi.validate(req.body, validateMoviePost);
   // console.log(result);
@@ -23,18 +24,23 @@ movieRouter.post('/api/movies', (req, res) => {
   movies.addNewMovieToTable(req.body)
     .then((data) => {
       res.send(data);
-    });
+    })
+    .catch(err => next(err));
 });
 
-movieRouter.get('/api/movies/:id', (req, res) => {
+movieRouter.get('/api/movies/:id', (req, res, next) => {
   // console.log(req.params);
   movies.getAllMoviesNamesById(req.params.id)
     .then((data) => {
+      if (data.length === 0) {
+        res.send('Invalid ID');
+      }
       res.send(data);
-    });
+    })
+    .catch(err => next(err));
 });
 
-movieRouter.put('/api/movies/:id', (req, res) => {
+movieRouter.put('/api/movies/:id', (req, res, next) => {
   const validateMoviePut = validation.validateMoviePutRequest();
   const { error } = Joi.validate(req.body, validateMoviePut);
   // console.log(result);
@@ -46,14 +52,16 @@ movieRouter.put('/api/movies/:id', (req, res) => {
   movies.updateMovieNameWithGivenId(req.params.id, req.body)
     .then((data) => {
       res.send(data);
-    });
+    })
+    .catch(err => next(err));
 });
 
-movieRouter.delete('/api/movies/:id', (req, res) => {
+movieRouter.delete('/api/movies/:id', (req, res, next) => {
   movies.deleteMoviesNameWithGivenId(req.params.id)
     .then((data) => {
       res.send(data);
-    });
+    })
+    .catch(err => next(err));
 });
 
 module.exports = movieRouter;
