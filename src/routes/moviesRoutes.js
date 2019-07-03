@@ -8,12 +8,12 @@ const movieRouter = express.Router();
 
 /* ------------------- API end points for movies ----------------------*/
 
-movieRouter.get('/api/movies', (req, res, next) => {
+movieRouter.get('/', (req, res, next) => {
   movies.getAllMovies().then(v => res.send(v))
     .catch(err => next(err));
 });
 
-movieRouter.post('/api/movies', (req, res, next) => {
+movieRouter.post('/', (req, res, next) => {
   const validateMoviePost = validation.validateMoviePostRequest();
   const { error } = Joi.validate(req.body, validateMoviePost);
   // console.log(result);
@@ -28,7 +28,7 @@ movieRouter.post('/api/movies', (req, res, next) => {
     .catch(err => next(err));
 });
 
-movieRouter.get('/api/movies/:id', (req, res, next) => {
+movieRouter.get('/:id', (req, res, next) => {
   // console.log(req.params);
   movies.getAllMoviesNamesById(req.params.id)
     .then((data) => {
@@ -40,7 +40,7 @@ movieRouter.get('/api/movies/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
-movieRouter.put('/api/movies/:id', (req, res, next) => {
+movieRouter.put('/:id', (req, res, next) => {
   const validateMoviePut = validation.validateMoviePutRequest();
   const { error } = Joi.validate(req.body, validateMoviePut);
   // console.log(result);
@@ -59,7 +59,7 @@ movieRouter.put('/api/movies/:id', (req, res, next) => {
     .catch(err => next(err));
 });
 
-movieRouter.delete('/api/movies/:id', (req, res, next) => {
+movieRouter.delete('/:id', (req, res, next) => {
   movies.deleteMoviesNameWithGivenId(req.params.id)
     .then((data) => {
       if (data.affectedRows === 0) {
